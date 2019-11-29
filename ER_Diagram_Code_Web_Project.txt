@@ -1,0 +1,53 @@
+University Course Registration System Database Code
+
+
+Creating The Database Command => CREATE DATABASE ucrs;
+
+Table Creation Command
+
+CREATE TABLE admin(
+    admin_id int,
+    user_name varchar(30),
+    user_password varchar(30),
+    PRIMARY KEY(admin_id)
+);
+
+
+CREATE TABLE course(
+    c_id int AUTO_INCREMENT,
+    admin_id int,
+    department_name varchar(30),
+    course_name varchar(30),
+    course_code varchar(30),
+    credit_hour int,
+    offered_semester varchar(30),
+    PRIMARY KEY(c_id,admin_id),
+    FOREIGN KEY (admin_id) REFERENCES admin(admin_id)
+);
+
+
+CREATE TABLE student(
+    s_id int AUTO_INCREMENT,
+    admin_id int,
+    student_name varchar(50),
+    student_id varchar(9),
+    student_password varchar(20),
+    department varchar(20),
+    PRIMARY KEY(s_id,admin_id,student_id),
+    FOREIGN KEY (admin_id) REFERENCES admin(admin_id)
+);
+
+
+CREATE TABLE coursecart(
+    cc_id int AUTO_INCREMENT,
+    admin_id int,
+    student_id int,
+    department_name varchar(30),
+    course_name varchar(30),
+    course_code varchar(30),
+    credit_hour int,
+    offered_semester varchar(30),
+    reg_status varchar(3),
+    PRIMARY KEY(cc_id,admin_id,student_id),
+    FOREIGN KEY (admin_id) REFERENCES admin(admin_id)
+);
